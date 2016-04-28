@@ -13,21 +13,22 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::post('/signup', [
     'uses' => 'UserController@postSignUp',
-    'as' => 'signup'
+    'as' => 'signup',
 ]);
 
 Route::post('/signin', [
     'uses' => 'UserController@postSignIn',
-    'as' => 'signin'
+    'as' => 'signin',
 ]);
 
 Route::get('dashboard', [
     'uses' => 'UserController@getDashboard',
-    'as' => 'dashboard'
+    'as' => 'dashboard',
+    'middleware' => 'auth',
 ]);
 
 // Route::group(['middleware' => ['web']], function() {
