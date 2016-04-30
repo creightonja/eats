@@ -26,9 +26,14 @@ Route::post('/signin', [
 ]);
 
 Route::get('dashboard', [
-    'uses' => 'UserController@getDashboard',
+    'uses' => 'RestaurantController@getDashboard',
     'as' => 'dashboard',
     'middleware' => 'auth',
+]);
+
+Route::post('/restaurant', [
+    'uses' => 'RestaurantController@createRestaurant',
+    'as' => 'restaurant.create',
 ]);
 
 // Route::group(['middleware' => ['web']], function() {
