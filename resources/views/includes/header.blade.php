@@ -9,7 +9,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Brand</a>
+          <a class="navbar-brand" href="{{ route('dashboard') }}">Home</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -37,6 +37,7 @@
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ route('account') }}">Account</a></li>
             <li><a href="{{ route('logout') }}">Logout</a></li>
             <!-- <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>

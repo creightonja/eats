@@ -49,4 +49,20 @@ class RestaurantController extends Controller
 
         return redirect()->route('dashboard')->with(['message' => 'Successfully deleted']);
     }
+
+    public function postEditRestaurant(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'address' => 'required'
+        ]);
+        $restaurant = Restaurant::find($request['id']);
+        if (Auth::user() != $restaurant->user) {
+            return redirect()->back();
+        }
+        $restaurant->name = $request['name'];
+        $restaurant->address = $request['address'];
+        $restaurant->update();
+        return response()->json(['new_name' => $restaurant->name, 'new_address' => $restaurant->address], 200);
+    }
 }

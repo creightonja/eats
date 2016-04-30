@@ -31,7 +31,7 @@ User Dashboard
     <div class="col-md-6 col-md-offset-3">
         <header><h3>Restaurants</h3></header>
         @foreach($restaurants as $restaurant)
-        <article class="post">
+        <article class="post" data-restaurantid="{{ $restaurant->id }}">
             <p class="restaurant-name">{{ $restaurant->name }}</p>
             <p class="restaurant-address">{{ $restaurant->address }}</p>
             <div class="info">
@@ -54,28 +54,32 @@ User Dashboard
 <div class="modal fade" tabindex="-1" role="dialog" id="edit-restaurant-modal">
   <div class="modal-dialog">
     <div class="modal-content">
-        <form class="" action="" method="post">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">Edit Restaurant</h4>
           </div>
           <div class="modal-body">
-              <div class="form-group">
-                  <label for="name">Name: </label>
-                  <input type="text" name="name" id="restaurant-name" value="" placeholder="Bob's Pizza">
-              </div>
-              <div class="form-group">
-                  <label for="address">Address: </label>
-                  <input type="text" name="address" id="restaurant-address" value="" placeholder="123 Bob Lane">
-              </div>
-              <input type="hidden" name="_token" id="_token" value="{{ Session::token() }}">
+              <form>
+                  <div class="form-group">
+                      <label for="name">Name: </label>
+                      <input type="text" name="name" id="restaurant-name" value="" placeholder="Bob's Pizza">
+                  </div>
+                  <div class="form-group">
+                      <label for="address">Address: </label>
+                      <input type="text" name="address" id="restaurant-address" value="" placeholder="123 Bob Lane">
+                  </div>
+              </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-primary" id="modal-save">Save changes</button>
           </div>
-      </form>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<script>
+    var token = '{{ Session::token() }}';
+    var url = '{{ route('restaurant.edit') }}'
+</script>
 @endsection
