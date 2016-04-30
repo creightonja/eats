@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Restaurant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class RestaurantController extends Controller
 {
     public function getDashboard()
     {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::orderBy('created_at', 'desc')->get();
         return view('dashboard', ['restaurants' => $restaurants]);
     }
 
@@ -36,11 +37,16 @@ class RestaurantController extends Controller
         return redirect()->route('dashboard')->with(['message' => $message]);
     }
 
-    public function getDeletePost($restaurant_id)
+    public function getDeleteRestaurant($restaurant_id)
     {
         //Method for inserting a different search parameter
         //$restauant = Restaurant::where('id', '>', $post_id)->first();
-        $restauant = Restaurant::where('id', $post_id)->first();
-        return
+        $restaurant = Restaurant::where('id', $restaurant_id)->first();
+        if (Auth::user() != $restaurant->user) {
+            return redirect()->back();
+        }
+        $restaurant->delete();
+
+        return redirect()->route('dashboard')->with(['message' => 'Successfully deleted']);
     }
 }

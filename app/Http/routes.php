@@ -25,6 +25,11 @@ Route::post('/signin', [
     'as' => 'signin',
 ]);
 
+Route::get('logout', [
+    'uses' => 'UserController@getLogout',
+    'as' => 'logout',
+]);
+
 Route::get('dashboard', [
     'uses' => 'RestaurantController@getDashboard',
     'as' => 'dashboard',
@@ -34,6 +39,13 @@ Route::get('dashboard', [
 Route::post('/restaurant', [
     'uses' => 'RestaurantController@createRestaurant',
     'as' => 'restaurant.create',
+    'middleware' => 'auth',
+]);
+
+Route::get('/restaurant/delete/{restaurant_id}', [
+    'uses' => 'RestaurantController@getDeleteRestaurant',
+    'as' => 'restaurant.delete',
+    'middleware' => 'auth',
 ]);
 
 // Route::group(['middleware' => ['web']], function() {
