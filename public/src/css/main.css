@@ -47,3 +47,15 @@ ul{
     padding: 10px;
     text-align: center;
 }
+
+.dropzone-container{
+    width: 180px;
+    height: 100px;
+}
+
+///////////////////////Restaurants page styles
+
+.list-group-item .ate {
+    float: right;
+    border-left: 1px solid black;
+}

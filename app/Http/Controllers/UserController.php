@@ -55,9 +55,39 @@ class UserController extends Controller
         return view('account', ['user' => Auth::user()]);
     }
 
-    public function postUpdateAccount()
+    public function postUpdateAccount(Request $request)
     {
-        
+        // $this->validate($request, [
+        //     'email' => 'required|email|unique:users',
+        //     'first_name' => 'required|min:3|max:40',
+        //     'last_name' => 'required|min:3|max:40',
+        // ]);
+        $user = Auth::user();
+        $user->email = $request['email'];
+        $user->first_name = $request['first_name'];
+        $user->last_name = $request['last_name'];
+        $user->update();
+        $file = $request->file('image');
+        $filename = $user->first_name . '-' . $user->id . '.jpg';
+        if ($file) {
+            Storage::disk('local')->put($filename, File::get($file));
+        }
+        return redirect()->route('account');
     }
 
+    public function addImage(Request $request)
+    {
+        $user = Auth::user();
+        $file = $request->file('file');
+        $name = $user->first_name . '-' . $user->id . '.jpg';
+        //$name = time() . $file->getClientOriginalName();
+        $file->move('images/account', $name);
+        return 'done';
+    }
+
+    public function getUserImage($filename)
+    {
+        $file = Storage::url($filename);
+        return new Response($file, 200);
+    }
 }

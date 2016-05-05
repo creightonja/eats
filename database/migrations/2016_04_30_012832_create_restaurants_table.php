@@ -19,6 +19,15 @@ class CreateRestaurantsTable extends Migration
             $table->integer('user_id');
             $table->timestamps();
         });
+
+        Schema::create('user_rank_restaurant', function(Blueprint $table)
+        {
+            $table->integer('restaurant_id')->unsigned()->index();
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
+            $table->integer('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('rank')->unsigned()->index();
+        });
     }
 
     /**
@@ -29,5 +38,6 @@ class CreateRestaurantsTable extends Migration
     public function down()
     {
         Schema::drop('restaurants');
+        Schema::drop('user_rank_restaurant');
     }
 }

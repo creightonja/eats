@@ -10,4 +10,9 @@ class Restaurant extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'user_rank_restaurant');
+    }
 }

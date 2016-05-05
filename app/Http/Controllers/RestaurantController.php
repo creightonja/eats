@@ -9,6 +9,28 @@ use Illuminate\Support\Facades\Auth;
 
 class RestaurantController extends Controller
 {
+
+    public function index()
+    {
+        $restaurants = Restaurant::orderBy('created_at', 'desc')->get();
+        return view('pages.restaurants');
+    }
+
+    public function show()
+    {
+        $restaurants = Restaurant::orderBy('created_at', 'desc')->get();
+        return $restaurants;
+    }
+
+    public function rank(Request $request)
+    {
+        //Validation
+        $user = Auth::user();
+        $restaurant = Restaurant::findOrFail($request['restaurant_id']);
+        $restaurant->users()->attach($user->id);
+        return 'it worked';
+    }
+
     public function getDashboard()
     {
         $restaurants = Restaurant::orderBy('created_at', 'desc')->get();

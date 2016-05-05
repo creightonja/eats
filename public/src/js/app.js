@@ -19,12 +19,21 @@ $('.edit-restaurant').on('click', function(event){
 $('#modal-save').on('click', function(){
     $.ajax({
         method: 'POST',
-        url: url,
+        url: restaurantEditUrl,
         data: {name: $('#restaurant-name').val(), address: $('#restaurant-address').val(), id: restaurantId, _token: token}
     }).done(function(msg){
-        console.log(msg);
         $(restaurantNameElement).text(msg['new_name']);
         $(restaurantAddressElement).text(msg['new_address']);
         $('#edit-restaurant-modal').modal('hide');
     });
 });
+
+
+
+
+
+// "myAwesomeDropzone" is the camelized version of the HTML element's ID
+Dropzone.options.dropzone = {
+  //paramName: "file", // The name that will be used to transfer the file
+  maxFiles: 1,
+};

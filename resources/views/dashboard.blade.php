@@ -18,10 +18,6 @@ User Dashboard
                 <label for="address">Address: </label>
                 <input type="text" name="address" id="address" value="{{ Request::old('address') }}" placeholder="123 Bob Lane">
             </div>
-            <!-- <div class="form-group">
-                <textarea class="form-control" name="description" rows="8" cols="40" placeholder="Restaurant Description"></textarea>
-            </div> -->
-
             <button type="submit" class="btn btn-primary" name="button">Add Restaurant</button>
             <input type="hidden" name="_token" id="_token" value="{{ Session::token() }}">
         </form>
@@ -80,6 +76,6 @@ User Dashboard
 
 <script>
     var token = '{{ Session::token() }}';
-    var url = '{{ route('restaurant.edit') }}'
+    var restaurantEditUrl = '{{ route('restaurant.edit') }}'
 </script>
 @endsection
