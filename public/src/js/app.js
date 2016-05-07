@@ -32,8 +32,8 @@ $('#modal-save').on('click', function(){
 
 
 
-// "myAwesomeDropzone" is the camelized version of the HTML element's ID
-Dropzone.options.dropzone = {
-  //paramName: "file", // The name that will be used to transfer the file
-  maxFiles: 1,
-};
+// // "myAwesomeDropzone" is the camelized version of the HTML element's ID
+// Dropzone.options.dropzone = {
+//   //paramName: "file", // The name that will be used to transfer the file
+//   maxFiles: 1,
+// };

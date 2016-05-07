@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 
 class RestaurantController extends Controller
@@ -25,10 +26,31 @@ class RestaurantController extends Controller
     public function rank(Request $request)
     {
         //Validation
+
         $user = Auth::user();
+
+        //Stopping duplicates from being added
+        if (DB::select('select * from user_rank_restaurant where user_id = ' . $user->id . ' and restaurant_id = ' . $request['restaurant_id'])){
+            return 'already added';
+        }
         $restaurant = Restaurant::findOrFail($request['restaurant_id']);
-        $restaurant->users()->attach($user->id);
-        return 'it worked';
+        $rank = $restaurant->users()->attach($user->id);
+        return $restaurant;
+    }
+
+    public function getRanks($user_id)
+    {
+        $user_ranks = DB::select('select * from user_rank_restaurant where user_id = ' . $user_id);
+        return $user_ranks;
+    }
+
+    public function destroyRank(Request $request)
+    {
+        $user = Auth::user();
+        DB::select('delete from user_rank_restaurant
+                    where user_id = ' . $user->id .
+                    ' and restaurant_id = ' . $request['restaurant_id']);
+        return 'rank removed';
     }
 
     public function getDashboard()

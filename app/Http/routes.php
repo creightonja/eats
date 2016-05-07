@@ -19,6 +19,8 @@ Route::get('/', function () {
 Route::get('restaurants', 'RestaurantController@index')->name('restaurants');
 Route::get('api/restaurants', 'RestaurantController@show')->name('api.restaurants');
 Route::post('api/restaurants/rank', 'RestaurantController@rank')->name('api.restaurants.rank');
+Route::get('api/rank/{user_id}', 'RestaurantController@getRanks')->name('api.ranks.show');
+Route::post('api/rank/destroy', 'RestaurantController@destroyRank')->name('api.ranks.destroy');
 
 
 //////////////////////////////////////User Routes//////////////////////////////
