@@ -23,6 +23,9 @@ class RestaurantController extends Controller
         return $restaurants;
     }
 
+
+
+    //Rank methods, todo: move to rank controller
     public function rank(Request $request)
     {
         //Validation
@@ -40,18 +43,40 @@ class RestaurantController extends Controller
 
     public function getRanks($user_id)
     {
-        $user_ranks = DB::select('select * from user_rank_restaurant where user_id = ' . $user_id);
-        return $user_ranks;
+        $restaurants = Restaurant::get();
+        $user_ranks = DB::select('SELECT user_rank_restaurant.*, restaurants.name, restaurants.address
+            FROM user_rank_restaurant
+            LEFT JOIN restaurants
+            ON user_rank_restaurant.restaurant_id=restaurants.id
+            WHERE user_rank_restaurant.user_id=' . $user_id);
+
+        //Parsing ranked array for already ranked restaurants
+        $ranked_array = [];
+        foreach($user_ranks as $rank){
+            array_push($ranked_array, $rank->restaurant_id);
+        }
+        //Marking which restaurants have been ranked
+        foreach($restaurants as $restaurant){
+            if (in_array($restaurant->id, $ranked_array)){
+                $restaurant->ranked = true;
+            } else {
+                $restaurant->ranked = false;
+            }
+        }
+        return ['restaurants' => $restaurants, 'ranks' => $user_ranks];
     }
 
     public function destroyRank(Request $request)
     {
         $user = Auth::user();
-        DB::select('delete from user_rank_restaurant
-                    where user_id = ' . $user->id .
-                    ' and restaurant_id = ' . $request['restaurant_id']);
+        DB::select('DELETE FROM user_rank_restaurant
+                    WHERE user_id = ' . $user->id .
+                    ' AND restaurant_id = ' . $request['restaurant_id']);
         return 'rank removed';
     }
+
+
+
 
     public function getDashboard()
     {
@@ -60,7 +85,7 @@ class RestaurantController extends Controller
     }
 
 
-    public function createRestaurant(Request $request)
+    public function create(Request $request)
     {
         //Validation
         $this->validate($request, [
@@ -81,7 +106,7 @@ class RestaurantController extends Controller
         return redirect()->route('dashboard')->with(['message' => $message]);
     }
 
-    public function getDeleteRestaurant($restaurant_id)
+    public function delete($restaurant_id)
     {
         //Method for inserting a different search parameter
         //$restauant = Restaurant::where('id', '>', $post_id)->first();
@@ -94,7 +119,7 @@ class RestaurantController extends Controller
         return redirect()->route('dashboard')->with(['message' => 'Successfully deleted']);
     }
 
-    public function postEditRestaurant(Request $request)
+    public function edit(Request $request)
     {
         $this->validate($request, [
             'name' => 'required',

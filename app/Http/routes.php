@@ -18,7 +18,7 @@ Route::get('/', function () {
 
 Route::get('restaurants', 'RestaurantController@index')->name('restaurants');
 Route::get('api/restaurants', 'RestaurantController@show')->name('api.restaurants');
-Route::post('api/restaurants/rank', 'RestaurantController@rank')->name('api.restaurants.rank');
+Route::post('api/rank', 'RestaurantController@rank')->name('api.rank');
 Route::get('api/rank/{user_id}', 'RestaurantController@getRanks')->name('api.ranks.show');
 Route::post('api/rank/destroy', 'RestaurantController@destroyRank')->name('api.ranks.destroy');
 
@@ -44,13 +44,18 @@ Route::get('dashboard', [
     'middleware' => 'auth',
 ]);
 Route::post('restaurant', [
-    'uses' => 'RestaurantController@createRestaurant',
+    'uses' => 'RestaurantController@create',
     'as' => 'restaurant.create',
     'middleware' => 'auth',
 ]);
 Route::get('restaurant/delete/{restaurant_id}', [
-    'uses' => 'RestaurantController@getDeleteRestaurant',
+    'uses' => 'RestaurantController@delete',
     'as' => 'restaurant.delete',
     'middleware' => 'auth',
 ]);
-Route::post('restaurant/edit', 'RestaurantController@postEditRestaurant')->name('restaurant.edit');
+Route::post('restaurant/edit', 'RestaurantController@edit')->name('restaurant.edit');
+
+
+/////////////////////////////////////Rank Restaurant Routes /////////////////////////
+
+Route::get('restaurants/rank', 'RestaurantRankController@index')->name('restaurants.rank');

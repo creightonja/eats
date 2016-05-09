@@ -3,29 +3,23 @@ Vue.component('restaurants', {
     data: function() {
         return {
             restaurants: [],
-            ranks: []
+            //ranks: []
         };
     },
     created: function(){
-        this.fetchRestaurants();
+        //this.fetchRestaurants();
         this.fetchRanks();
-        this.findRanked();
     },
     methods: {
         fetchRestaurants: function() {
             $.getJSON('api/restaurants', function(data) {
                 this.restaurants = data;
             }.bind(this));
-            console.log(this.restaurants[2]);
         },
         fetchRanks: function() {
             $.getJSON('api/rank/' + userId, function(data) {
-                this.ranks = data;
+                this.restaurants = data;
             }.bind(this));
-            console.log(this.ranks);
-        },
-        findRanked: function() {
-            //console.log(vm.restaurants[0].id);
         },
         createRank: function(restaurant) {
             $.post(restaurantsRankUrl, {restaurant_id: restaurant.id, _token: token})
@@ -54,3 +48,6 @@ Vue.directive('ajax', {
 var vm = new Vue({
     el: 'body',
 });
+
+
+//<ul class="list-group"><h3>Restaurants</h3><li class="list-group-item" restaurant-id="{{ restaurant.id }}" v-for="restaurant in restaurants" :restaurant="restaurant">{{ restaurant.name }}<button v-show="!restaurant.ranked" style="float:right;" @click="createRank(restaurant)">Rank it!</button><button v-show="restaurant.ranked" style="float:right;" @click="destroyRank(restaurant)">Remove it!</button></li></ul>

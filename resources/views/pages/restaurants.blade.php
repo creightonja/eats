@@ -19,7 +19,7 @@ Restaurants
 <template id="restaurants-template">
     <ul class="list-group">
         <h3>Restaurants</h3>
-            <li class="list-group-item" restaurant-id="@{{ restaurant.id }}" v-for="restaurant in restaurants" :restaurant="restaurant">
+            <li class="list-group-item" v-for="restaurant in restaurants.restaurants">
                   @{{ restaurant.name }}
                   <button v-show="!restaurant.ranked" style="float:right;" @click="createRank(restaurant)">Rank it!</button>
                   <button v-show="restaurant.ranked" style="float:right;" @click="destroyRank(restaurant)">Remove it!</button>
@@ -29,7 +29,7 @@ Restaurants
 
 <script>
     var token = '{{ Session::token() }}';
-    var restaurantsRankUrl = '{{ route('api.restaurants.rank') }}';
+    var restaurantsRankUrl = '{{ route('api.rank') }}';
     var rankDestroyUrl = '{{ route('api.ranks.destroy') }}';
     var userId = '{{ Auth::user()->id }}';
 </script>
