@@ -1,5 +1,4 @@
 import { EventEmitter } from "events";
-
 import dispatcher from "../dispatcher";
 
 class RestaurantStore extends EventEmitter {
@@ -20,8 +19,22 @@ class RestaurantStore extends EventEmitter {
 			global_rank: "not ranked",
 			type: restaurant.type
 		});
-		this.emit("change");
 	}
+
+  updateRestaurant(restaurant) {
+    const restaurantIndex = this.restaurants.findIndex(x => x.id === action.restaurant.id);
+    if (restaurantIndex !== -1) {
+      restaurantIndex.name = action.restaurant.name;
+      restaurantIndex.type = action.restaurant.type;
+    }
+  }
+
+  deleteRestaurant(id) {
+    const restaurantIndex = this.restaurants.findIndex(x => x.id === id);
+    if (restaurantIndex !== -1) {
+      this.restaurants.splice(restaurantIndex, 1);
+    }
+  }
 
   getRestaurants() {
   	return this.restaurants;
@@ -40,6 +53,7 @@ class RestaurantStore extends EventEmitter {
     switch(action.type) {
       case "CREATE_RESTAURANT": {
         this.createRestaurant(action.restaurant);
+        this.emit("change");
         break;
       }
       case "FETCH_RESTAURANTS": {
@@ -53,20 +67,13 @@ class RestaurantStore extends EventEmitter {
         this.emit("change");
         break;
       }
-      case "DELETE_RESTAURANT": {
-        const restaurantIndex = this.restaurants.findIndex(x => x.id === action.id);
-        if (restaurantIndex !== -1) {
-          this.restaurants.splice(restaurantIndex, 1);
-        }
+      case "UPDATE_RESTAURANT": {
+        this.updateRestaurant(action.restaurant);
         this.emit("change");
         break;
       }
-      case "UPDATE_RESTAURANT": {
-        const restaurantIndex = this.restaurants.findIndex(x => x.id === action.restaurant.id);
-        if (restaurantIndex !== -1) {
-          restaurantIndex.name = action.restaurant.name;
-          restaurantIndex.type = action.restaurant.type;
-        }
+      case "DELETE_RESTAURANT": {
+        this.deleteRestaurant(action.id);
         this.emit("change");
         break;
       }

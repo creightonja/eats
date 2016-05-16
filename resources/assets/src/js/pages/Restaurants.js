@@ -50,8 +50,8 @@ export default class Restaurants extends React.Component {
     this.setState({ranked: RestaurantStore.getRanks()});
   }
 
-  createRestaurant() {
-    RestaurantActions.createRestaurant({name: "Rocky", type: "Beer"});
+  createRestaurant(restaurant) {
+    RestaurantActions.createRestaurant(restaurant);
   }
 
   fetchRestaurants() {

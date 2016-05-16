@@ -19,7 +19,7 @@ export default class Restaurant extends React.Component {
 		return(
 			<li>
 				<div>{ restaurant.name }</div>
-				<div class="{restaurant.rank_direction}">{ restaurant.global_rank }</div>
+				<div class="{ restaurant.rank_direction }">{ restaurant.global_rank }</div>
 				<div>{ restaurant.type }</div>
 				<button class="btn btn-primary" onClick={this.handleDelete.bind(this, restaurant)}>Delete</button>
 				<div>{ Dishes }</div>

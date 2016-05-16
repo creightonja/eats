@@ -1,4 +1,4 @@
-import Dispatcher from "../dispatcher";
+import dispatcher from "../dispatcher";
 
 export function createDish(dish){
 	dispatcher.dispatch({
@@ -21,12 +21,14 @@ export function deleteDish(id){
 	});
 }
 
-export function apiGetDishes(){
-	dispatcher.dispatch({
-		type: "FETCHING_DISHES",
-	});
-	dispatcher.dispatch({
-		type: "RECEIVE_RESTAURANTS",
-		restaur
+export function fetchDishes(){
+	dispatcher.dispatch({type: "FETCH_DISHES"});
+	let data;
+	fetch('http://localhost:8000/api/dishes', [{method: 'GET', headers: {'Content-Type': 'JSON'}, mode: 'no-cors', cache: 'default',}]).then(function(response){
+		return response.json();
+	}).then(function(json){
+    dispatcher.dispatch({type: "RECIEVE_DISHES", dishes: json});
+	}).catch(function(ex){
+		console.log('parsing failed', ex);
 	});
 }

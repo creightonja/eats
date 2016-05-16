@@ -27,6 +27,11 @@ Route::get('api/rank/{user_id}', 'RestaurantController@getRanks')->name('api.ran
 Route::post('api/rank/destroy', 'RestaurantController@destroyRank')->name('api.ranks.destroy');
 
 
+////////////////////////////////////Dish Routes//////////////////////////////
+
+Route::get('api/dishes', 'DishController@show')->name('api.dishes');
+
+
 //////////////////////////////////////User Routes//////////////////////////////
 Route::post('signup', 'UserController@postSignUp')->name('signup');
 Route::post('signin', 'UserController@postSignIn')->name('signin');
