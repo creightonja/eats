@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAGE,IAAK;EACH,UAAU,EAAE,UAAU;;AAItB,sBAEU;EACR,UAAU,EAAE,OAAO;;ACVxB,UAAI;EACJ,OAAO,EAAE,YAAY",
+"sources": ["scss/neat/grid/_box-sizing.scss","scss/pages/home.scss"],
+"names": [],
+"file": "main.css"
+}

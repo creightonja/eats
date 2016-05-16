@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::get('/react', function () {
+    return view('pages.reactindex');
+})->name('react');
+
 
 Route::get('restaurants', 'RestaurantController@index')->name('restaurants');
 Route::get('api/restaurants', 'RestaurantController@show')->name('api.restaurants');

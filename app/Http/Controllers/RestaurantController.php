@@ -44,26 +44,31 @@ class RestaurantController extends Controller
     public function getRanks($user_id)
     {
         $restaurants = Restaurant::get();
-        $user_ranks = DB::select('SELECT user_rank_restaurant.*, restaurants.name, restaurants.address
+        //Retrieving list of restaurants ranked by the user
+        $user_ranks = DB::select('SELECT user_rank_restaurant.*
             FROM user_rank_restaurant
             LEFT JOIN restaurants
             ON user_rank_restaurant.restaurant_id=restaurants.id
             WHERE user_rank_restaurant.user_id=' . $user_id);
-
-        //Parsing ranked array for already ranked restaurants
+        //Building array for already ranked restaurants
         $ranked_array = [];
+        $rank_array = [];
         foreach($user_ranks as $rank){
             array_push($ranked_array, $rank->restaurant_id);
+            array_push($rank_array, $rank->rank);
         }
-        //Marking which restaurants have been ranked
+        //Marking which restaurants have been ranked and their rank number
         foreach($restaurants as $restaurant){
-            if (in_array($restaurant->id, $ranked_array)){
+            $array_key = array_search($restaurant->id, $ranked_array);
+            if (($array_key !== false)){
                 $restaurant->ranked = true;
+                $restaurant->rank = $rank_array[$array_key];
             } else {
                 $restaurant->ranked = false;
+                $restaurant->rank = null;
             }
         }
-        return ['restaurants' => $restaurants, 'ranks' => $user_ranks];
+        return $restaurants;
     }
 
     public function destroyRank(Request $request)
