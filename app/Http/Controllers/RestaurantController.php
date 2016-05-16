@@ -19,7 +19,7 @@ class RestaurantController extends Controller
 
     public function show()
     {
-        $restaurants = Restaurant::orderBy('created_at', 'desc')->get();
+        $restaurants = Restaurant::with('dishes')->orderBy('created_at', 'desc')->get();
         return $restaurants;
     }
 

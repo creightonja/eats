@@ -22,14 +22,20 @@ export default class Restaurants extends React.Component {
     RestaurantStore.on("change", this.getRestaurants);
     RestaurantStore.on("change", this.getRestaurantsLoading);
     RestaurantStore.on("change", this.getRanked);
-
   }
 
   componentWillUnmount() {
     RestaurantStore.removeListener("change", this.getRestaurants);
     RestaurantStore.removeListener("change", this.getRestaurantsLoading);
     RestaurantStore.removeListener("change", this.getRanked);
+  }
 
+  componentDidMount() {
+    if (this.state.restaurants[0] == null) {
+      RestaurantActions.fetchRestaurants();
+    } else {
+      console.log(this.state.restaurants);
+    }
   }
 
   getRestaurants() {
@@ -48,8 +54,8 @@ export default class Restaurants extends React.Component {
     RestaurantActions.createRestaurant({name: "Rocky", type: "Beer"});
   }
 
-  reloadRestaurants() {
-    RestaurantActions.reloadRestaurants();
+  fetchRestaurants() {
+    RestaurantActions.fetchRestaurants();
   }
 
   deleteRestaurant(id) {
@@ -62,12 +68,11 @@ export default class Restaurants extends React.Component {
       <Restaurant key={i} deleteRestaurant={this.deleteRestaurant.bind(this)} restaurant={restaurant}/> 
     );
 
-
     return (
       <div>
         <h1>Restaurants</h1>
         <div class="row">{Restaurants}</div>
-        <button class="btn btn-primary" onClick={this.reloadRestaurants.bind(this)}>Reload Restaurants</button>
+        <button class="btn btn-primary" onClick={this.fetchRestaurants.bind(this)}>Fetch Restaurants</button>
         <div>Fetching Restaurants: {this.state.loading ? "true" : "false"} </div>
       </div>
     );

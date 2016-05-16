@@ -17,6 +17,10 @@ class CreateRestaurantsTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->integer('user_id');
+            $table->string('type');
+            $table->integer('global_rank');
+            $table->string('rank_direction');
+            $table->string('photo');
             $table->timestamps();
         });
 
@@ -37,7 +41,7 @@ class CreateRestaurantsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('restaurants');
         Schema::drop('user_rank_restaurant');
+        Schema::drop('restaurants');  
     }
 }

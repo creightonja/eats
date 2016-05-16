@@ -36,7 +36,7 @@ class RestaurantStore extends EventEmitter {
   }
 
   handleActions(action) {
-    console.log(action.type)
+    console.log(action.type);
     switch(action.type) {
       case "CREATE_RESTAURANT": {
         this.createRestaurant(action.restaurant);

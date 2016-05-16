@@ -23,9 +23,8 @@
   "devDependencies": {},
   "scripts": {
     "dev": "webpack-dev-server --content-base src --inline --hot",
-    "build": "node-sass --include-path scss src/css/scss/main.scss  src/css/main.css",
-    "watch": "nodemon -e scss -x \"npm run build\""
+    "watch": "sass --watch src/css/scss:../../public/src/css"
   },
-  "author": "",
+  "author": "Jason Creighton",
   "license": "ISC"
 }

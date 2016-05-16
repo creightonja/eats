@@ -1,65 +1,10 @@
-.new-post{
-    padding: 16px 0;
-    border-bottom: 1px solid #ccc;
+html {
+  box-sizing: border-box; }
 
-}
+*, *::after, *::before {
+  box-sizing: inherit; }
 
-.new-post header,
-.posts header{
-    margin-bottom: 20px;
+.style .me {
+  display: inline-block; }
 
-}
-
-.posts .post{
-    padding-left: 10px;
-    border-left: 3px solid #a21b24;
-    margin-bottom: 30px;
-
-}
-
-.posts .post .info{
-    color: #aaa;
-    font-style: italic;
-}
-
-ul{
-    list-style: none;
-}
-
-.error{
-    border: 1px solid red;
-    background-color: #f9b5af;
-    color: red;
-    padding: 10px;
-    text-align: center;
-}
-.error,
-.success{
-    margin: 5px 0;
-    padding-bottom: 10px;
-}
-
-
-.success{
-    border: 1px solid green;
-    background-color: #d1f9da;
-    color: green;
-    padding: 10px;
-    text-align: center;
-}
-
-.dropzone-container{
-    width: 180px;
-    height: 100px;
-}
-
-///////////////////////Restaurants page styles
-
-.list-group-item .ate {
-    float: right;
-    border-left: 1px solid black;
-}
-
-.rank-item {
-    display: inline-block;
-}
+/*# sourceMappingURL=main.css.map */
