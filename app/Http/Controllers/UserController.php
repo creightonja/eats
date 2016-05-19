@@ -11,6 +11,18 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+
+    protected $hidden = ['password'];
+
+    public function apiSignIn(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+        Auth::guard('api')->user();
+    }
+
     public function postSignUp(Request $request)
     {
         $this->validate($request, [

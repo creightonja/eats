@@ -8,6 +8,7 @@ import Layout from "./pages/Layout";
 import Dishes from "./pages/Dishes";
 import DishRanks from "./pages/DishRanks";
 import RestaurantRanks from "./pages/RestaurantRanks";
+import Auth from "./pages/Auth";
 
 const app = document.getElementById('app');
 
@@ -19,6 +20,7 @@ ReactDOM.render(
       <Route path="dishes" name="dishes" component={Dishes}></Route>
       <Route path="restaurantranks" name="restaurantranks" component={RestaurantRanks}></Route>
       <Route path="dishranks" name="dishranks" component={DishRanks}></Route>
+      <Route path="auth" name="auth" component={Auth}></Route>
     </Route>
   </Router>,
 app);

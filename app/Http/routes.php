@@ -26,10 +26,21 @@ Route::post('api/rank', 'RestaurantController@rank')->name('api.rank');
 Route::get('api/rank/{user_id}', 'RestaurantController@getRanks')->name('api.ranks.show');
 Route::post('api/rank/destroy', 'RestaurantController@destroyRank')->name('api.ranks.destroy');
 
+//'middleware' => 'auth:api'
+Route::group(['prefix' => 'api/v1/'], function (){
+    ///////////////////////////Restaurant APIs/////////////////////
+    // Route::get('restaurants', 'RestaurantController@show')->name('api.restaurants');
+    // Route::post('rank', 'RestaurantController@rank')->name('api.rank');
+    // Route::get('rank/{user_id}', 'RestaurantController@getRanks')->name('api.ranks.show');
+    // Route::post('ank/destroy', 'RestaurantController@destroyRank')->name('api.ranks.destroy');
+    Route::resource('dishes', 'DishController');
+    Route::get('dishesRestaurant', 'DishController@getDishesWithRestaurants');
+    ////////////////////////////Dish APIs////////////////////////////
+});
 
 ////////////////////////////////////Dish Routes//////////////////////////////
 
-Route::get('api/dishes', 'DishController@show')->name('api.dishes');
+
 
 
 //////////////////////////////////////User Routes//////////////////////////////

@@ -1,4 +1,5 @@
 import dispatcher from "../dispatcher";
+import 'whatwg-fetch';
 
 export function createDish(dish){
 	dispatcher.dispatch({
@@ -23,8 +24,7 @@ export function deleteDish(id){
 
 export function fetchDishes(){
 	dispatcher.dispatch({type: "FETCH_DISHES"});
-	let data;
-	fetch('http://localhost:8000/api/dishes', [{method: 'GET', headers: {'Content-Type': 'JSON'}, mode: 'no-cors', cache: 'default',}]).then(function(response){
+	fetch('http://localhost:8000/api/v1/dishesRestaurant', [{method: 'GET', headers: {'Content-Type': 'JSON'}, mode: 'no-cors', cache: 'default',}]).then(function(response){
 		return response.json();
 	}).then(function(json){
     dispatcher.dispatch({type: "RECIEVE_DISHES", dishes: json});

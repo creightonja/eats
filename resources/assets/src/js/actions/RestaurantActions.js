@@ -1,4 +1,5 @@
 import dispatcher from "../dispatcher";
+import 'whatwg-fetch';
 
 export function createRestaurant(restaurant) {
 	dispatcher.dispatch({

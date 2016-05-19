@@ -1,4 +1,5 @@
 import React from "react";
+import Coverflow from "react-coverflow";
 
 import Dish from "../components/Dish";
 import * as DishActions from "../actions/DishActions";
@@ -60,7 +61,14 @@ export default class Dishes extends React.Component {
 		return (
 			<div>
 				<h1>Dishes</h1>
-				<div class="row">{Dishes}</div>
+				<ul class="dish-ul">
+          <Coverflow width="900" height="400"
+            displayQuantityOfSide={2}
+            navigation={true}
+            enableScroll={true}>
+            {Dishes}
+          </Coverflow>
+        </ul>
 			</div>
 		);
 	}

@@ -14,13 +14,20 @@
     "babel-preset-stage-0": "^6.3.13",
     "flux": "^2.1.1",
     "history": "^1.17.0",
+    "lodash": "^4.12.0",
     "react": "^0.14.6",
+    "react-coverflow": "^0.1.12",
     "react-dom": "^0.14.6",
     "react-router": "^1.0.3",
     "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "whatwg-fetch": "^1.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "node-sass": "^3.7.0",
+    "sass-loader": "^3.2.0",
+    "webpack": "^1.13.0"
+  },
   "scripts": {
     "dev": "webpack-dev-server --content-base src --inline --hot",
     "watch": "sass --watch src/css/scss:../../public/src/css"

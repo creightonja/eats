@@ -22,6 +22,7 @@ export default class Nav extends React.Component {
     const dishesClass = location.pathname.match(/^\/dishes/) ? "active" : "";
     const restaurantRanksClass = location.pathname.match(/^\/restaurantranks/) ? "active" : "";
     const dishRanksClass = location.pathname.match(/^\/dishranks/) ? "active" : "";
+    const authClass = location.pathname.match(/^\/auth/) ? "active" : "";
     const navClass = collapsed ? "collapse" : "";
 
     return (
@@ -51,6 +52,9 @@ export default class Nav extends React.Component {
               </li>
               <li class={dishRanksClass}>
                 <Link to="dishranks" onClick={this.toggleCollapse.bind(this)}>Dish Ranks</Link>
+              </li>
+              <li class={authClass}>
+                <Link to="auth" onClick={this.toggleCollapse.bind(this)}>Auth</Link>
               </li>
               
             </ul>

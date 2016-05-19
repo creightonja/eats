@@ -15,14 +15,13 @@ export default class Restaurant extends React.Component {
 		const Dishes = restaurant.dishes.map((dish, i) => 
 				<RestaurantDish key={i} dish={dish}/>
 			);
-		console.log(Dishes);
 		return(
-			<li>
-				<div>{ restaurant.name }</div>
-				<div class="{ restaurant.rank_direction }">{ restaurant.global_rank }</div>
-				<div>{ restaurant.type }</div>
-				<button class="btn btn-primary" onClick={this.handleDelete.bind(this, restaurant)}>Delete</button>
-				<div>{ Dishes }</div>
+			<li class="restaurant-li">
+				<div class="restaurant-name li-item">Name: { restaurant.name }</div>
+				<div class={restaurant.rank_direction + " rank-direction li-item"} >Rank: { restaurant.global_rank }</div>
+				<div class="restaurant-type li-item">Restaurant Type: { restaurant.type }</div>
+				<div class="restaurant-dishes li-item">Top Dishes: { Dishes }</div>
+				<button class="btn btn-primary li-item" onClick={this.handleDelete.bind(this, restaurant)}>Delete</button>
 			</li>
 		);
 	}

@@ -6,7 +6,6 @@ class DishStore extends EventEmitter {
 		super();
 		this.dishes = [];
 		this.loading = false;
-		this.ranked = [];
 	}
 
 	createDish(dish) {
@@ -27,7 +26,7 @@ class DishStore extends EventEmitter {
     }
   }
 
-  deleteDish(id) {
+ 	deleteDish(id) {
   	const dishIndex = this.dishes.findIndex(x => x.id === id);
   	if (dishIndex !== -1) {
   		this.dishes.splice(dishIndex, 1);
@@ -40,10 +39,6 @@ class DishStore extends EventEmitter {
 
 	getLoading() {
 		return this.loading;
-	}
-
-	getRanks() {
-		return this.ranks;
 	}
 
 	handleActions(action) {
