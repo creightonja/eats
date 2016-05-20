@@ -25,7 +25,7 @@ export function deleteRestaurant(id) {
 export function fetchRestaurants() {
   dispatcher.dispatch({type: "FETCH_RESTAURANTS"});
   let data;
-  fetch('http://localhost:8000/api/restaurants', [{method: 'GET', headers: {'Content-Type': 'JSON'}, mode: 'no-cors', cache: 'default',}]).then(function(response){
+  fetch('/api/restaurants', [{method: 'GET', headers: {'Content-Type': 'JSON'}, mode: 'no-cors', cache: 'default',}]).then(function(response){
     return response.json();
   }).then(function(json){
     dispatcher.dispatch({type: "RECEIVE_RESTAURANTS", restaurants: json});

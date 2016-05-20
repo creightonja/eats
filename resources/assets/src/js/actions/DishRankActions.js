@@ -23,7 +23,7 @@ export function saveRanks(list) {
 
 export function fetchRanks(id) {
 	dispatcher.dispatch({type "FETCH_DISH_RANKS"});
-	fetch('http://localhost:8000/api/v1/userDishRanks/' + id, [{method: 'GET', headers: {'Content-Type': 'JSON'}, mode: 'no-cors', cache: 'default',}]).then(function(response){
+	fetch('/api/v1/userDishRanks/' + id, [{method: 'GET', headers: {'Content-Type': 'JSON'}, mode: 'no-cors', cache: 'default',}]).then(function(response){
 		return response.json();
 	}).then(function(json){
 		dispatcher.dispatch({type: "RECEIVE_DISH_RANKS", json});
@@ -34,7 +34,7 @@ export function fetchRanks(id) {
 
 export function submitRanks(user) {
 		dispatcher.dispatch({type "SUBMIT_DISH_RANKS"});
-	fetch('http://localhost:8000/api/v1/userDishRanks/' + user.id, [{method: 'POST', headers: {'Content-Type': 'JSON'}, mode: 'no-cors', cache: 'default',}]).then(function(response){
+	fetch('/api/v1/userDishRanks/' + user.id, [{method: 'POST', headers: {'Content-Type': 'JSON'}, mode: 'no-cors', cache: 'default',}]).then(function(response){
 		return response.json();
 	}).then(function(json){
 		dispatcher.dispatch({type: "RECEIVE_DISH_RANKS"})
