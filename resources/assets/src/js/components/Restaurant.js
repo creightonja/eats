@@ -21,8 +21,9 @@ export default class Restaurant extends React.Component {
 				<div class={restaurant.rank_direction + " rank-direction li-item"} >Rank: { restaurant.global_rank }</div>
 				<div class="restaurant-type li-item">Restaurant Type: { restaurant.type }</div>
 				<div class="restaurant-dishes li-item">Top Dishes: { Dishes }</div>
-				<button class="btn btn-primary li-item" onClick={this.handleDelete.bind(this, restaurant)}>Delete</button>
 			</li>
 		);
 	}
 }
+
+//<button class="btn btn-primary li-item" onClick={this.handleDelete.bind(this, restaurant)}>Delete</button>

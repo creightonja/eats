@@ -87,7 +87,7 @@ class RestaurantController extends Controller
 
     public function getDashboard()
     {
-        $restaurants = Restaurant::orderBy('created_at', 'desc')->get();
+        $restaurants = Restaurant::get();
         return view('dashboard', ['restaurants' => $restaurants]);
     }
 

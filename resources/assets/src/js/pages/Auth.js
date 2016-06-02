@@ -46,9 +46,8 @@ export default class Auth extends React.Component {
       <div className="create_account_screen">
         <div className="create_account_form">
           <h1>Create account</h1>
-          <p>Example of form validation built with React.</p>
           <form onSubmit={this.saveAndContinue}>
-
+            Email
             <input 
               text="Email Address" 
               ref="email"
@@ -61,7 +60,7 @@ export default class Auth extends React.Component {
               emptyMessage="Email can't be empty"
               errorVisible={this.state.showEmailError}
             />
-
+            Password
             <input 
               text="Password" 
               type="password"
@@ -74,7 +73,7 @@ export default class Auth extends React.Component {
               emptyMessage="Password is invalid"
               onChange={this.changePassword} 
             /> 
-
+            Confirm Password
             <input 
               text="Confirm password" 
               ref="passwordConfirm"

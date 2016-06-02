@@ -6,6 +6,8 @@ class DishStore extends EventEmitter {
 		super();
 		this.dishes = [];
 		this.loading = false;
+		this.selected = [];
+		this.selectedLoading = false;
 	}
 
 	createDish(dish) {
@@ -19,7 +21,7 @@ class DishStore extends EventEmitter {
 	}
 
 	updateDish(id) {
-    const dishIndex = this.dishs.findIndex(x => x.id === id);
+    const dishIndex = this.dishes.findIndex(x => x.id === id);
     if (dishIndex !== -1) {
       dishIndex.name = action.dish.name;
       dishIndex.type = action.dish.type;
@@ -67,6 +69,17 @@ class DishStore extends EventEmitter {
 			}
 			case "DELETE_DISH": {
 				this.deleteDish(action.id);
+				this.emit("change");
+				break;
+			}
+			case "FETCH_SELECTED_DISH": {
+				this.selectedLoading = true;
+				this.emit("change");
+				break;
+			}
+			case "RECIEVE_SELECTED_DISH": {
+				this.selected.push(action.selected);
+				this.selectedLoading = false;
 				this.emit("change");
 				break;
 			}

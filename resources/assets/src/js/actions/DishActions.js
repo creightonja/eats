@@ -27,7 +27,18 @@ export function fetchDishes(){
 	fetch('http://localhost:8000/api/v1/dishesRestaurant', [{method: 'GET', headers: {'Content-Type': 'JSON'}, mode: 'no-cors', cache: 'default',}]).then(function(response){
 		return response.json();
 	}).then(function(json){
-    dispatcher.dispatch({type: "RECIEVE_DISHES", dishes: json});
+    	dispatcher.dispatch({type: "RECIEVE_DISHES", dishes: json});
+	}).catch(function(ex){
+		console.log('parsing failed', ex);
+	});
+}
+
+export function fetchSelected(){
+	dispatcher.dispatch({type: "FETCH_SELECTED_DISH"});
+	fetch('http://localhost:8000/api/v1/selected-dish', [{method: 'GET', headers: {'Content-Type': 'JSON'}, mode: 'no-cors', cache: 'default',}]).then(function(response){
+		return response.json();
+	}).then(function(json){
+    	dispatcher.dispatch({type: "RECIEVE_SELECTED_DISH", selected: json});
 	}).catch(function(ex){
 		console.log('parsing failed', ex);
 	});

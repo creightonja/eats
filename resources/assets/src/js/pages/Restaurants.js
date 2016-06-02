@@ -73,13 +73,7 @@ export default class Restaurants extends React.Component {
       <div>
         <h1>Restaurants</h1>
         <ul class="restaurant-ul">
-          <Coverflow width="900" height="600"
-            displayQuantityOfSide={2}
-            navigation={true}
-            enableScroll={true}
-            >
-        {Restaurants}
-          </Coverflow>
+          {Restaurants}
         </ul>
         <button class="btn btn-primary" onClick={this.fetchRestaurants.bind(this)}>Fetch Restaurants</button>
         <div>Fetching Restaurants: {this.state.loading ? "true" : "false"} </div>

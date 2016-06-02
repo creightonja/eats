@@ -29,14 +29,10 @@ User Dashboard
         @foreach($restaurants as $restaurant)
         <article class="post" data-restaurantid="{{ $restaurant->id }}">
             <p class="restaurant-name">{{ $restaurant->name }}</p>
-            <p class="restaurant-address">{{ $restaurant->address }}</p>
-            <div class="info">
-                Created by {{ $restaurant->user->first_name }} at {{ $restaurant->created_at }}
-            </div>
             <div class="interaction">
                 <a href="#">Like</a>
                 | <a href="">Dislike</a>
-                @if(Auth::user() == $restaurant->user)
+                @if(true)
                 | <a href="#" class="edit-restaurant">Edit</a>
                 | <a href="{{ route('restaurant.delete', ['restaurant_id' => $restaurant->id]) }}">Delete</a>
                 @endif()

@@ -17,8 +17,9 @@ export default class Dish extends React.Component {
 				<div class={dish.rank_direction + " li-item rank-direction" }>{ dish.global_rank }</div>
 				<div class="li-item dish-type">{ dish.type }</div>
 				<div class="li-item dish-restaurant"><DishRestaurant restaurant={dish.restaurant}/></div>
-				<button class="btn btn-primary" onClick={this.deleteDish.bind(this, dish.id)}>Delete Dish</button>
 			</li>
 		);
 	}
 }
+
+//				<button class="btn btn-primary" onClick={this.deleteDish.bind(this, dish.id)}>Delete Dish</button>
