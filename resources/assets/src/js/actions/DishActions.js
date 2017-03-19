@@ -33,9 +33,9 @@ export function fetchDishes(){
 	});
 }
 
-export function fetchSelected(){
+export function fetchSelected(id){
 	dispatcher.dispatch({type: "FETCH_SELECTED_DISH"});
-	fetch('http://localhost:8000/api/v1/selected-dish', [{method: 'GET', headers: {'Content-Type': 'JSON'}, mode: 'no-cors', cache: 'default',}]).then(function(response){
+	fetch('http://localhost:8000/api/v1/selected-dish/' + id, [{method: 'GET', headers: {'Content-Type': 'JSON'}, mode: 'no-cors', cache: 'default',}]).then(function(response){
 		return response.json();
 	}).then(function(json){
     	dispatcher.dispatch({type: "RECIEVE_SELECTED_DISH", selected: json});

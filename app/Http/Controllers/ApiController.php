@@ -19,7 +19,13 @@ class ApiController extends Controller {
 
 	public function respondOk($message = 'Ok')
 	{
-		return $this->setStatusCode(200)->respondWithData($data);
+		return $this->setStatusCode(200)->respondWithData($message);
+	}
+
+	public function respondBadRequest($message = 'Not Found!')
+	{
+		return $this->setStatusCode(400)->respondWithError($message);
+
 	}
 
 	public function respondNotFound($message = 'Not Found!')

@@ -11,13 +11,51 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/test', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/react', function () {
+Route::get('/', function () {
     return view('pages.reactindex');
 })->name('react');
+
+Route::group(['prefix' => 'api/'], function() {
+    Route::post('/auth', 'ApiAuth@create');
+    Route::group(['middleware' => 'jwt'], function() {
+        Route::delete('/auth', 'ApiAuth@delete');
+        Route::get('/auth', 'ApiAuth@index');
+    });
+});
+
+
+
+
+###############################   Api V1   #####################################
+
+Route::group(['prefix' => '/api/v1'], function (){
+
+
+
+    ####################   User Functionality   ##########################
+
+    Route::group(['prefix' => '/user'], function(){
+        Route::post('/signup', 'AuthController@signup');
+        Route::post('/authenticate', 'AuthController@authenticate');
+
+        Route::get('/', 'AuthController@index')->middleware('jwt');
+        Route::post('/edit', 'AuthController@edit')->middleware('jwt');
+    });
+
+    #####################   Auth Wall   ##################################
+
+    Route::group(['middleware' => 'jwt'], function() {
+
+
+
+    });
+});
+
+////////////////////////////////////Dish Routes//////////////////////////////
 
 
 Route::get('restaurants', 'RestaurantController@index')->name('restaurants');
@@ -26,24 +64,17 @@ Route::post('api/rank', 'RestaurantController@rank')->name('api.rank');
 Route::get('api/rank/{user_id}', 'RestaurantController@getRanks')->name('api.ranks.show');
 Route::post('api/rank/destroy', 'RestaurantController@destroyRank')->name('api.ranks.destroy');
 
-//'middleware' => 'auth:api'
-Route::group(['prefix' => 'api/v1/'], function (){
+
+//////////////////////////////////////User Routes//////////////////////////////
+
+
     ///////////////////////////Restaurant APIs/////////////////////
     // Route::get('restaurants', 'RestaurantController@show')->name('api.restaurants');
     // Route::post('rank', 'RestaurantController@rank')->name('api.rank');
     // Route::get('rank/{user_id}', 'RestaurantController@getRanks')->name('api.ranks.show');
     // Route::post('ank/destroy', 'RestaurantController@destroyRank')->name('api.ranks.destroy');
-    Route::resource('dishes', 'DishController');
-    Route::get('dishesRestaurant', 'DishController@getDishesWithRestaurants');
-    ////////////////////////////Dish APIs////////////////////////////
-});
-
-////////////////////////////////////Dish Routes//////////////////////////////
 
 
-
-
-//////////////////////////////////////User Routes//////////////////////////////
 Route::post('signup', 'UserController@postSignUp')->name('signup');
 Route::post('signin', 'UserController@postSignIn')->name('signin');
 Route::get('logout', 'UserController@getLogout')->name('logout');

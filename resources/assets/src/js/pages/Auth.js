@@ -28,8 +28,8 @@ export default class Auth extends React.Component {
 
   changeEmail(event){
   	const email = event.target.value;
-  	console.log(email);
-  	this.setState({email});
+  	console.log(this.state);
+  	this.setState({email: email});
   }
 
   validateEmail(event) {

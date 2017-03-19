@@ -17,7 +17,7 @@ export default class Dishes extends React.Component {
 			loading: DishStore.getLoading(),
 			selected: DishStore.getSelected(),
 			selectedLoading: DishStore.getSelectedLoading(),
-			currentDish: null;
+			currentDish: null
 		}
 	}
 
@@ -51,14 +51,14 @@ export default class Dishes extends React.Component {
 	}
 
 	//Checks to see if selected dish has been previously loaded
-	//If not loaded, 
+	//If not loaded, retrieve it, then set current Dish to selected id
 	getSelected(id) {
-		let selectedIndex = this.selected.findIndex(x => x.id === id);
+		let selectedIndex = this.state.selected.findIndex(x => x.id === id);
 		if (selectedIndex !== -1) {
 			DishActions.fetchSelected(id);
 			selectedIndex = this.selected.findIndex(x => x.id === id);
 		}
-		return this.
+		this.setState({currentDish: this.state.selected[selectedIndex]});
 	}
 
 	getSelectedLoading() {
