@@ -15,12 +15,13 @@ const myHeaders = new Headers({
 });
 
 export function fetchRestaurants() {
-  dispatcher.dispatch({type: "CREATE_USER"});
+  dispatcher.dispatch({type: "PENDING_USER"});
   let data;
   fetch('/api/v1/user/signup', [{method: 'POST', headers: {'Content-Type': 'JSON'}, mode: 'no-cors', cache: 'default'}]).then(function(response){
     return response.json();
-  }).then(function(json){
-    dispatcher.dispatch({type: "RECEIVE_RESTAURANTS", user: json});
+  }).then(function(response){
+    const authorization = response.headers.get('Authorization');
+    dispatcher.dispatch({type: "RECEIVED_USER", user: json});
   }).catch(function(ex){
     console.log('parsing failed', ex);
   });
